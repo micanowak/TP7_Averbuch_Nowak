@@ -1,0 +1,77 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: #d2a727      ;
+}
+.Logo
+{
+  width:7%;
+}
+.Barra{
+  background-color: #29194a    !important;
+}
+.fondoBoton{
+  background-color:#29194a;
+}
+
+.textBoton{
+  color:white;
+}
+.Centro{
+  float:center;
+}
+.fondoFooter{
+  background-color: #f8e8b8  ;
+}
+.fondoImg{
+  background-image: "estudio.jpg";
+}
+
+.tamanoBC{
+  width:70%;
+    background-color: #593b94;
+
+}
+
+.tamanoB{
+  width:50%;
+}
+
+.fondoOPC{
+  background-color:#3c608b;
+}
+.centrarImg{display: block; padding-left: 50%;}
+
+.textCenter{
+  text-align: center;
+}
+
+.fontMillonario{
+  font-family: 'Copperplate Condensed SSi';
+}
+
+.interletrado{
+  letter-spacing: 2.5px;
+}
+
+.floatCenter{
+  float: center;
+}
+
+.aplausos{
+  width:10%;
+}

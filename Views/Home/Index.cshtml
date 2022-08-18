@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    <div class = "container fontMillonario interletrado">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img src="logo.png" class="d-block w-50 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="estudio.jpg" class="d-block w-75 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="ganador.jpg" class="d-block w-75 mx-auto" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="tabla.jpg" class="d-block w-60 mx-auto" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>    
+    </div>
+    <div class = "row d-flex justify-content-center m-5">
+        <div class = "col-2 d-flex justify-content-center">
+            <a href = '@Url.Action("Player","Home")'><button type="button" class="btn fondoBoton textBoton fontMillonario interletrado shadow p-3 mb-5">Comenzar el juego</button></a>    
+        </div>
+        <div class = "col-2 d-flex justify-content-center">
+            <a href = '@Url.Action("Tutorial","Home")'><button type="button" class="btn fondoBoton textBoton fontMillonario interletrado shadow p-3 mb-5">Ver tutorial</button></a>  
+
+        </div>
+    </div>
+    
+}
+
