@@ -31,9 +31,7 @@ body {
 .textBoton{
   color:white;
 }
-.Centro{
-  float:center;
-}
+
 .fondoFooter{
   background-color: #f8e8b8  ;
 }
@@ -50,6 +48,9 @@ body {
 .tamanoB{
   width:50%;
 }
+
+.setentaPerc
+{width: 85%;}
 
 .fondoOPC{
   background-color:#3c608b;
@@ -70,6 +71,13 @@ body {
 
 .floatCenter{
   float: center;
+}
+
+.floatR{
+  float: right;
+}
+.floatL{
+  float: left;
 }
 
 .aplausos{
