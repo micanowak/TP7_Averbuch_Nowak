@@ -18,11 +18,6 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
     public IActionResult Player()
     {
         return View();
@@ -31,6 +26,14 @@ public class HomeController : Controller
      public IActionResult Tutorial()
     {
         return View();
+    }
+
+    public HttpGetAttribute Jugar(string Nombre)
+    {
+        
+    }
+    public IActionResult PreguntaRespondida(char Opcion1, char Opcion2){
+        
     }
       public IActionResult PantallaFindelJuego()
     {
