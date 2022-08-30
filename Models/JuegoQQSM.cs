@@ -19,10 +19,8 @@ namespace tp7_Averbuch_Nowak.Models
         private bool _ComodinSaltearPregunta = true;
         private List<Pozo> _ListaPozo = new List<Pozo>();
         private Jugadores _Player;
-    
-        public static void IniciarJuego(string Nombre)
-        {
-            public int PreguntaActual{ get {return _PreguntaActual;} set {_PreguntaActual = value;}}
+
+        public int PreguntaActual{ get {return _PreguntaActual;} set {_PreguntaActual = value;}}
             public char RespuestaCorrectaActual{ get {return _RespuestaCorrectaActual;} set {_RespuestaCorrectaActual = value;}}
             public int PosicionPozo{ get {return _PosicionPozo;} set {_PosicionPozo = value;}}
             public int PozoAcumuladoSeguro{ get {return _PozoAcumuladoSeguro;} set {_PozoAcumuladoSeguro = value;}}
@@ -32,6 +30,12 @@ namespace tp7_Averbuch_Nowak.Models
             public bool ComodinSaltearPregunta{ get {return _ComodinSaltearPregunta;} set {_ComodinSaltearPregunta = value;}}
             public List<Pozo> ListaPozo{ get {return _ListaPozo;} set {_ListaPozo = value;}}
             public Jugadores Player{ get {return _Player;} set {_Player = value;}}
+    
+        public static void IniciarJuego(string Nombre)
+        {
+            using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                
+            }
         }
     }
 }
