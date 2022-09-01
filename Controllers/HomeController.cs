@@ -28,13 +28,6 @@ public class HomeController : Controller
         return View();
     }
 
-    public HttpGetAttribute Jugar(string Nombre)
-    {
-        
-    }
-    public IActionResult PreguntaRespondida(char Opcion1, char Opcion2){
-        
-    }
       public IActionResult PantallaFindelJuego()
     {
         return View();
