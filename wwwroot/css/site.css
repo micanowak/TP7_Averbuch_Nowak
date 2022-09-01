@@ -19,7 +19,7 @@ body {
 }
 .Logo
 {
-  width:7%;
+  width:40%;
 }
 .Barra{
   background-color: #29194a    !important;
@@ -83,3 +83,13 @@ body {
 .aplausos{
   width:10%;
 }
+
+.btn-bd-username {
+  font-size: 200%;
+  letter-spacing: 2px;
+  color: #ffe484;
+  border-color: #ffe484;}
+
+  
+    
+  

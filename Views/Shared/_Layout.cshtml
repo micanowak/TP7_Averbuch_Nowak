@@ -10,37 +10,49 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light Barra border-bottom box-shadow mb-3 fontMillonario interletrado">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light Barra border-bottom box-shadow mb-3 fontMillonario interletrado align-items-middle">
             <div class="container-fluid">
-                <img src = "/logo.png" class="Logo">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <div class="row">
+                    <div class="col-2">
+                        <img src = "/logo.png" class="Logo">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between m-3">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Tutorial">Tutorial</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Player">Player</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Pregunta">preg</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="PantallaFindelJuego">fin</a>
-                        </li>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="col-7 my-auto">
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between m-3">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item mr-5">
+                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item mr-5">
+                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Tutorial">Tutorial</a>
+                                </li>
+                                <li class="nav-item mr-5">
+                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Player">Player</a>
+                                </li>
+                                <li class="nav-item mr-5">
+                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Pregunta">preg</a>
+                                </li>
+                                
+                                <li class="nav-item mr-5">
+                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="PantallaFindelJuego">fin</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="RespuestaPreguntaOk">resp</a>
-                        </li>
-                    </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="RespuestaPreguntaOk">resp</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-3 mx-auto my-auto">
+                        <div class = "container floatR">
+                            <p class = "textBoton fontMillonario"><button class="btn btn-bd-username d-lg-inline-block mb-3 mb-md-0 ml-md-3">Username: nombre<!--(arroba)ViewBag.Jugadores.Nombre--></button></p>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </nav>
     </header>
