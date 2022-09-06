@@ -31,6 +31,7 @@ public class HomeController : Controller
     public HttpGetAttribute Jugar(string Nombre)
     {
         ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta;
+        ViewBag.Respuestas = JuegoQQSM.ObtenerRespuesta;
     }
     public IActionResult PreguntaRespondida(char Opcion1){
         
