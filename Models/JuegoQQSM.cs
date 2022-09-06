@@ -32,7 +32,7 @@ namespace tp7_Averbuch_Nowak.Models
                 _Player = db.QueryFirstOrDefault(SQL);
             }
             _PreguntaActual = 1;
-            _PosicionPozo = 1;
+            _PosicionPozo = 0;
             _PozoAcumuladoSeguro = 0;
             _PozoAcumulado = 0;
         }
@@ -59,10 +59,66 @@ namespace tp7_Averbuch_Nowak.Models
             return respPregActual;
         }
 
-        public bool RespuestaUsuario(char Opción, char OpcionComodin){
+        public bool RespuestaUsuario(char Opcion, char OpcionComodin){
             
+            if(OpcionComodin=='A' || OpcionComodin=='B' || OpcionComodin=='C' || OpcionComodin=='D'){
+                _ComodinDobleChance = false;
+                string SQL = "UPDATE Jugadores SET ComodinDobleChance = 0 WHERE IdJugador = @pIdJugador";
+                using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                db.Execute(SQL, new{pIdJugador = _Player.IdJugador});
+                }
+            }
+
+            if(Opcion==_RespuestaCorrectaActual || OpcionComodin == _RespuestaCorrectaActual){
+                if(_ListaPozo[_PosicionPozo].ValorSeguro){
+                    importeSumado =_ListaPozo[_PosicionPozo].Importe;
+                    string SQL = "UPDATE Jugadores SET PozoGanado = @pImporteSumado WHERE IdJugador = @pIdJugador";
+                    using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                    db.Execute(SQL, new{pImporteSumado = importeSumado, pIdJugador = _Player.IdJugador});
+                    }
+                }
+                _PosicionPozo++;
+                
+            }
             
-            return;
+            return true;
+        }
+
+        public void SaltearPregunta(){
+            if(_ComodinSaltearPregunta){
+                _ComodinSaltearPregunta = false;
+                string SQL = "UPDATE Jugadores SET ComodinSaltear = 0 WHERE IdJugador = @pIdJugador";
+                using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                db.Execute(SQL, new{pIdJugador = _Player.IdJugador});
+                }
+                Random rd = new Random();
+                int rand_num = rd.Next(1,18);
+                _PreguntaActual = rand_num;
+                ObtenerProximaPregunta();
+            }
+        }
+
+        public int DevolverPosicionPozo(){
+            return _PosicionPozo;
+        }
+
+        public char[] Descartar50(){
+            char[] dev;
+            if(_Comodin5050){
+                _Comodin5050 = false;
+                string SQL = "UPDATE Jugadores SET Comodin50 = 0 WHERE IdJugador = @pIdJugador";
+                using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                db.Execute(SQL, new{pIdJugador = _Player.IdJugador});
+                }
+                SQL = "SELECT TOP 2 IdRespuesta FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual and Correcta = 0";
+                using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                dev = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+                }
+            } else{
+                dev= null;
+            }
+
+            return dev;
         }
     }
 }
