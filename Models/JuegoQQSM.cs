@@ -71,8 +71,13 @@ namespace tp7_Averbuch_Nowak.Models
 
             if(Opcion==_RespuestaCorrectaActual || OpcionComodin == _RespuestaCorrectaActual){
                 if(_ListaPozo[_PosicionPozo].ValorSeguro){
-                    importeSumado =_ListaPozo[_PosicionPozo].Importe;
-                    string SQL = "UPDATE Jugadores SET PozoGanado = @pImporteSumado WHERE IdJugador = @pIdJugador";
+                    int importeSumado;
+                    string SQL = "SELECT PozoGanado FROM Jugadores WHERE IdPregunta = @pIdJug";
+                    using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                    importeSumado = db.QueryFirstOrDefault(SQL, new{pIdJug = _Player.IdJugador});
+                    }
+                    importeSumado +=_ListaPozo[_PosicionPozo].Importe;
+                    SQL = "UPDATE Jugadores SET PozoGanado = @pImporteSumado WHERE IdJugador = @pIdJugador";
                     using(SqlConnection db = new SqlConnection(_ConnectionString)){
                     db.Execute(SQL, new{pImporteSumado = importeSumado, pIdJugador = _Player.IdJugador});
                     }
@@ -91,9 +96,7 @@ namespace tp7_Averbuch_Nowak.Models
                 using(SqlConnection db = new SqlConnection(_ConnectionString)){
                 db.Execute(SQL, new{pIdJugador = _Player.IdJugador});
                 }
-                Random rd = new Random();
-                int rand_num = rd.Next(1,18);
-                _PreguntaActual = rand_num;
+                _PreguntaActual++;
                 ObtenerProximaPregunta();
             }
         }
@@ -119,6 +122,10 @@ namespace tp7_Averbuch_Nowak.Models
             }
 
             return dev;
+        }
+
+        public Jugadores DevolverJugador(){
+            return _Player;
         }
     }
 }
