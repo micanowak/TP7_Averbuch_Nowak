@@ -1,35 +1,26 @@
 @{
     ViewData["Title"] = "Player";
-    <div class = "col ">
+    <div class = "col">
         <div class = "row">
-            <img src="/logo.png" class = "mx-auto" style="width:20%" >
-            
+            <img src = "conductor.jpg">   
         </div>
         <div class = "row">
             <div class = "col">
             </div>
             <div class = "col">
-                <div class="jumbotron fondoOPC p-2 rounded-pill">
-                    <h4 class = "textBoton textCenter mb-3 fontMillonario interletrado" >NOMBRE</h4>
-                    <form method = "post" action = '@Url.Action("GuardarUsuario", "Home")'>
-                        <input type = "hidden" name = "IdUsario" value = ""> 
-                        <div class = "row" style = "margin:2%;">
-                            <input type = "text" name = "" class = "rounded-pill border border-light">
-                        </div>
-                        <div class = "row mt-4 mb-3">
-                            <button type="submit" class="btn btn-md w-50 mx-auto fontMillonario interletrado" style = "background-color:#29194a; color:white ">Submit</button>
-                        </div>
-                    </form> 
-                    
+                <form method = "post" action = '@Url.Action("GuardarUsuario", "Home")'>
+                <input type = "hidden" name = "IdUsario" value = "@ViewBag.Jugadores.IdJugador"> 
+                    <div class = "row" style = "margin:2%;">
+                        <div style = "font-family:impact; font-size:30px; color:#593b94;">Nombre:</div><input type = "text" name = "Nombre">
+                    </div>
+                <div class="container justify-content-center">
+                    <button type="submit" class="btn btn-md " style = "background-color:#29194a; color:white ">Submit</button>
                 </div>
-                
+                </form> 
             </div>
             <div class = "col">
             </div>
             
         </div>
-    </div>
-    
+    </div>  
 } 
-
- 
