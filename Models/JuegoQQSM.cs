@@ -14,28 +14,55 @@ namespace tp7_Averbuch_Nowak.Models
         private int _PosicionPozo;
         private int _PozoAcumuladoSeguro;
         private int _PozoAcumulado;
-        private bool _Comodin5050 = true;
-        private bool _ComodinDobleChance = true;
-        private bool _ComodinSaltearPregunta = true;
+        private bool _Comodin5050;
+        private bool _ComodinDobleChance;
+        private bool _ComodinSaltearPregunta;
         private List<Pozo> _ListaPozo = new List<Pozo>();
         private Jugadores _Player;
 
-        public int PreguntaActual{ get {return _PreguntaActual;} set {_PreguntaActual = value;}}
-            public char RespuestaCorrectaActual{ get {return _RespuestaCorrectaActual;} set {_RespuestaCorrectaActual = value;}}
-            public int PosicionPozo{ get {return _PosicionPozo;} set {_PosicionPozo = value;}}
-            public int PozoAcumuladoSeguro{ get {return _PozoAcumuladoSeguro;} set {_PozoAcumuladoSeguro = value;}}
-            public int PozoAcumulado{ get {return _PozoAcumulado;} set {_PozoAcumulado = value;}}
-            public bool Comodin5050{ get {return _Comodin5050;} set {_Comodin5050 = value;}}
-            public bool ComodinDobleChance{ get {return _ComodinDobleChance;} set {_ComodinDobleChance = value;}}
-            public bool ComodinSaltearPregunta{ get {return _ComodinSaltearPregunta;} set {_ComodinSaltearPregunta = value;}}
-            public List<Pozo> ListaPozo{ get {return _ListaPozo;} set {_ListaPozo = value;}}
-            public Jugadores Player{ get {return _Player;} set {_Player = value;}}
-    
-        public static void IniciarJuego(string Nombre)
+        
+        public void IniciarJuego(string Nombre)
         {
+            string SQL = "INSERT INTO Jugadores(Nombre, FechaHora, PozoGanado, ComodinDobleChance, ComodinSaltear, Comodin50) VALUES (@pNombre, @pFechaHora, @pPozoGanado, @pComodinDobleChance, @pComodinSaltear, @pComodin50";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
-                
+                db.Execute(SQL, new{pNombre = Nombre, pFechaHora = 1, pPozoGanado = 0, pComodinDobleChance = true, pComodinSaltear = true, pComodin50 = true});
             }
+            SQL = "SELECT TOP 1 * FROM Jugadores ORDER BY IdJugador DESC";
+            using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                _Player = db.QueryFirstOrDefault(SQL);
+            }
+            _PreguntaActual = 1;
+            _PosicionPozo = 1;
+            _PozoAcumuladoSeguro = 0;
+            _PozoAcumulado = 0;
+        }
+
+        public Preguntas ObtenerProximaPregunta(){
+            Preguntas pregCompleta = new Preguntas();
+            string SQL = "SELECT * FROM Preguntas WHERE IdPregunta = @pPreguntaActual";
+            using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                pregCompleta = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+            }
+            return pregCompleta;
+        }
+
+        public List<Respuestas> ObtenerRespuestas(){
+            List<Respuestas> respPregActual = new List<Respuestas>();
+            string SQL = "SELECT OpcionRespuesta FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual AND Correcta = true";
+            using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                _RespuestaCorrectaActual = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+            }
+            SQL = "SELECT * FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual";
+            using(SqlConnection db = new SqlConnection(_ConnectionString)){
+                respPregActual = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+            }
+            return respPregActual;
+        }
+
+        public bool RespuestaUsuario(char Opción, char OpcionComodin){
+            
+            
+            return;
         }
     }
 }
