@@ -30,9 +30,9 @@ public class HomeController : Controller
 
     public HttpGetAttribute Jugar(string Nombre)
     {
-        
+        ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta;
     }
-    public IActionResult PreguntaRespondida(char Opcion1, char Opcion2){
+    public IActionResult PreguntaRespondida(char Opcion1){
         
     }
       public IActionResult PantallaFindelJuego()

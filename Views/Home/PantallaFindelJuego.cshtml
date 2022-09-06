@@ -6,15 +6,18 @@
             <div class="col-4"></div>
             <div class = "col-4 floatCenter">
                 <div class = "floatCenter border border-light fondoOPC textBoton rounded-pill m-5 p-2">
-                    <h1 class = "textCenter fontMillonario interletrado m-1"> Felicidades!</h1>
+                    <h1 class = "textCenter fontMillonario interletrado m-1"> Felicidades "@ViewBag.Jugadores.Nombre"! </h1>
                 </div>    
                 <div class = "floatCenter border border-light textBoton rounded-pill m-5 p-2" style="background-color: #593b94;">
-                    <h3 class = "textCenter fontMillonario interletrado m-1"> Ganaste: $______</h3>
+                    <h3 class = "textCenter fontMillonario interletrado m-1"> Ganaste: $ "@ViewBag.Jugadores.PozoGanado"</h3>
                 </div>
             </div>
         </div>
         <div class = "row">
             <img src="/aplausos.png" class = "mx-auto aplausos"><img src="/aplausos.png" class = "mx-auto aplausos"><img src="/aplausos.png" class = "mx-auto aplausos"><img src="/aplausos.png" class = "mx-auto aplausos"><img src="/aplausos.png" class = "mx-auto aplausos"><img src="/aplausos.png" class = "mx-auto aplausos"><img src="/aplausos.png" class = "mx-auto aplausos"><img src="/aplausos.png" class = "mx-auto aplausos">
+        </div>
+        <div class = "row justify-content-center">
+            <a href = '@Url.Action("Player","Home")'><button type="button" class="btn fondoBoton textBoton fontMillonario interletrado shadow p-3 mb-5">Volver a empezar</button></a>    
         </div>
     </div>  
     
