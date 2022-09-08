@@ -32,23 +32,13 @@
                                 <li class="nav-item mr-5">
                                     <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Player">Player</a>
                                 </li>
-                                <li class="nav-item mr-5">
-                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="Pregunta">preg</a>
-                                </li>
-                                
-                                <li class="nav-item mr-5">
-                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="PantallaFindelJuego">fin</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fs-5" asp-area="" asp-controller="Home" asp-action="RespuestaPreguntaOk">resp</a>
-                                </li>
+                               
                             </ul>
                         </div>
                     </div>
                     <div class="col-3 mx-auto my-auto">
                         <div class = "container floatR">
-                            <p class = "textBoton fontMillonario"><button class="btn btn-bd-username d-lg-inline-block mb-3 mb-md-0 ml-md-3">Username:</button></p>
+                            <p class = "textBoton fontMillonario"><button class="btn btn-bd-username d-lg-inline-block mb-3 mb-md-0 ml-md-3">Username: @ViewBag.Player.Nombre</button></p>
 
                         </div>
                     </div>

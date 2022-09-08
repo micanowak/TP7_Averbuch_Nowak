@@ -1,14 +1,12 @@
 @{
     ViewData["Title"] = "Player";
     <div class = "col">
-        <div class = "row">
-            <img src = "conductor.jpg">   
-        </div>
+       
         <div class = "row">
             <div class = "col">
             </div>
             <div class = "col">
-                <form method = "post" action = '@Url.Action("GuardarUsuario", "Home")'>
+                <form method = "post" action = '@Url.Action("Jugar", "Home")'>
                     <div class = "row" style = "margin:2%;">
                         <div style = "font-family:impact; font-size:30px; color:#593b94;">Nombre:</div><input type = "text" name="Nombre">
                     </div>
