@@ -32,6 +32,11 @@ public class HomeController : Controller
         ViewBag.ListaPozo = JuegoQQSM.DevolverPosicionPozo();
         return View();
     }
+    public IActionResult GuardarUsuario(string Nombre)
+    {
+        Console.WriteLine(Nombre);
+        return View("Player");
+    }
 
      public IActionResult Tutorial()
     {
