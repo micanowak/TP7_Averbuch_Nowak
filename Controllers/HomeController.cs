@@ -36,7 +36,7 @@ public class HomeController : Controller
         ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta();
         ViewBag.ListaRespuestas = JuegoQQSM.ObtenerProximaPregunta();
         ViewBag.Player = JuegoQQSM.DevolverJugador();
-        ViewBag.ListaPozo = JuegoQQSM.DevolverPosicionPozo();
+        ViewBag.ListaPozo = JuegoQQSM.ListaPozo();
         return View("Pregunta");
     }
 
