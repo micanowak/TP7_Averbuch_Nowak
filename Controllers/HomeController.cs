@@ -23,22 +23,21 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Jugar(string Nombre)
+    {
+        JuegoQQSM.IniciarJuego(Nombre);
+        ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta();
+        ViewBag.ListaRespuestas = JuegoQQSM.ObtenerProximaPregunta();
+        ViewBag.Player = JuegoQQSM.DevolverJugador();
+        ViewBag.ListaPozo = JuegoQQSM.DevolverPosicionPozo();
+        return View();
+    }
+
      public IActionResult Tutorial()
     {
         return View();
     }
 
-<<<<<<< HEAD
-    public HttpGetAttribute Jugar(string Nombre)
-    {
-        ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta;
-        ViewBag.Respuestas = JuegoQQSM.ObtenerRespuesta;
-    }
-    public IActionResult PreguntaRespondida(char Opcion1){
-        
-    }
-=======
->>>>>>> 4a85f6c3731ab258a092b3860f5214ae433a5f6c
       public IActionResult PantallaFindelJuego()
     {
         return View();

@@ -9,19 +9,19 @@ namespace tp7_Averbuch_Nowak.Models
     {
         private static string _ConnectionString = @"Server=A-PHZ2-CIDI-022\SQLEXPRESS;DataBase=JuegoQQSM;Trusted_Connection=True;";
 
-        private int _PreguntaActual;
-        private char _RespuestaCorrectaActual;
-        private int _PosicionPozo;
-        private int _PozoAcumuladoSeguro;
-        private int _PozoAcumulado;
-        private bool _Comodin5050;
-        private bool _ComodinDobleChance;
-        private bool _ComodinSaltearPregunta;
-        private List<Pozo> _ListaPozo = new List<Pozo>();
-        private Jugadores _Player;
+        private static int _PreguntaActual;
+        private static char _RespuestaCorrectaActual;
+        private static int _PosicionPozo;
+        private static int _PozoAcumuladoSeguro;
+        private static int _PozoAcumulado;
+        private static bool _Comodin5050;
+        private static bool _ComodinDobleChance;
+        private static bool _ComodinSaltearPregunta;
+        private static List<Pozo> _ListaPozo = new List<Pozo>();
+        private static Jugadores _Player;
 
         
-        public void IniciarJuego(string Nombre)
+        public static void IniciarJuego(string Nombre)
         {
             string SQL = "INSERT INTO Jugadores(Nombre, FechaHora, PozoGanado, ComodinDobleChance, ComodinSaltear, Comodin50) VALUES (@pNombre, @pFechaHora, @pPozoGanado, @pComodinDobleChance, @pComodinSaltear, @pComodin50";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
@@ -37,7 +37,7 @@ namespace tp7_Averbuch_Nowak.Models
             _PozoAcumulado = 0;
         }
 
-        public Preguntas ObtenerProximaPregunta(){
+        public static Preguntas ObtenerProximaPregunta(){
             Preguntas pregCompleta = new Preguntas();
             string SQL = "SELECT * FROM Preguntas WHERE IdPregunta = @pPreguntaActual";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
@@ -46,7 +46,7 @@ namespace tp7_Averbuch_Nowak.Models
             return pregCompleta;
         }
 
-        public List<Respuestas> ObtenerRespuestas(){
+        public static List<Respuestas> ObtenerRespuestas(){
             List<Respuestas> respPregActual = new List<Respuestas>();
             string SQL = "SELECT OpcionRespuesta FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual AND Correcta = true";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
@@ -59,7 +59,7 @@ namespace tp7_Averbuch_Nowak.Models
             return respPregActual;
         }
 
-        public bool RespuestaUsuario(char Opcion, char OpcionComodin){
+        public static bool RespuestaUsuario(char Opcion, char OpcionComodin){
             
             if(OpcionComodin=='A' || OpcionComodin=='B' || OpcionComodin=='C' || OpcionComodin=='D'){
                 _ComodinDobleChance = false;
@@ -89,7 +89,7 @@ namespace tp7_Averbuch_Nowak.Models
             return true;
         }
 
-        public void SaltearPregunta(){
+        public static void SaltearPregunta(){
             if(_ComodinSaltearPregunta){
                 _ComodinSaltearPregunta = false;
                 string SQL = "UPDATE Jugadores SET ComodinSaltear = 0 WHERE IdJugador = @pIdJugador";
@@ -101,11 +101,11 @@ namespace tp7_Averbuch_Nowak.Models
             }
         }
 
-        public int DevolverPosicionPozo(){
+        public static int DevolverPosicionPozo(){
             return _PosicionPozo;
         }
 
-        public char[] Descartar50(){
+        public static char[] Descartar50(){
             char[] dev;
             if(_Comodin5050){
                 _Comodin5050 = false;
@@ -124,7 +124,7 @@ namespace tp7_Averbuch_Nowak.Models
             return dev;
         }
 
-        public Jugadores DevolverJugador(){
+        public static Jugadores DevolverJugador(){
             return _Player;
         }
     }
