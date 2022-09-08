@@ -18,6 +18,13 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult FinDelJuego()
+    {
+        ViewBag.InfoPlayer = JuegoQQSM.DevolverJugador();
+        ViewBag.PozoGanado = ViewBag.InfoPlayer.PozoGanado;
+        return View("PantallaFindelJuego");
+    }
+
     public IActionResult Player()
     {
         return View();
@@ -29,8 +36,8 @@ public class HomeController : Controller
         ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta();
         ViewBag.ListaRespuestas = JuegoQQSM.ObtenerProximaPregunta();
         ViewBag.Player = JuegoQQSM.DevolverJugador();
-        ViewBag.ListaPozo = JuegoQQSM.DevolverPosicionPozo();
-        return View();
+        ViewBag.ListaPozo = JuegoQQSM.ListaPozo();
+        return View("Pregunta");
     }
     public IActionResult GuardarUsuario(string Nombre)
     {
@@ -38,20 +45,22 @@ public class HomeController : Controller
         return View("Player");
     }
 
-     public IActionResult Tutorial()
+    public IActionResult Tutorial()
     {
         return View();
     }
 
-      public IActionResult PantallaFindelJuego()
+    public IActionResult PreguntaRespondida(char Opcion1, char Opcion2)
     {
-        return View();
+        bool Acerto = JuegoQQSM.RespuestaUsuario(Opcion1,Opcion2);
+        if(Acerto){
+        return View("RespuestaPreguntaOk");
+        } else{
+        return View("PantallaFindelJuego");
+        }
+            
     }
-      public IActionResult RespuestaPreguntaOk()
-    {
-        return View();
-    }
-      public IActionResult Pregunta()
+    public IActionResult Pregunta()
     {
         return View();
     }

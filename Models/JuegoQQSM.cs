@@ -37,6 +37,30 @@ namespace tp7_Averbuch_Nowak.Models
             _PozoAcumulado = 0;
         }
 
+        public static List<Pozo> ListaPozo(){
+            Pozo p1 = new Pozo(1000, false);
+            Pozo p2 = new Pozo(2000, false);
+            Pozo p3 = new Pozo(5000, true);
+            Pozo p4 = new Pozo(7000, false);
+            Pozo p5 = new Pozo(10000, false);
+            Pozo p6 = new Pozo(12000, true);
+            Pozo p7 = new Pozo(15000, false);
+            Pozo p8 = new Pozo(18000, false);
+            Pozo p9 = new Pozo(20000, true);
+            Pozo p10 = new Pozo(22000, true);
+            _ListaPozo.Add(p1);
+            _ListaPozo.Add(p2);
+            _ListaPozo.Add(p3);
+            _ListaPozo.Add(p4);
+            _ListaPozo.Add(p5);
+            _ListaPozo.Add(p6);
+            _ListaPozo.Add(p7);
+            _ListaPozo.Add(p8);
+            _ListaPozo.Add(p9);
+            _ListaPozo.Add(p10);
+            return _ListaPozo;
+        }
+
         public static Preguntas ObtenerProximaPregunta(){
             Preguntas pregCompleta = new Preguntas();
             string SQL = "SELECT * FROM Preguntas WHERE IdPregunta = @pPreguntaActual";
