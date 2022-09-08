@@ -1,82 +1,72 @@
 @{
-    
-    
-   
-    @ViewBag.ListaPozo
-
     <div class = "container-fluid fontMillonario interletrado">
-            
             <div class="row h-100" >
-            <div class="col-md-2 col-12">
-                if(@ViewBag.Player.Comodin5050){
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton interletrado">Comodin 50/50</button>
-                </div>
-                }
-                if(@ViewBag.Player.ComodinSaltear){
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton interletrado">Comodín Saltear</button>
-                </div>
-                }
-                if(@ViewBag.Player.ComodinDobleChance){
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton interletrado">Comodín Doble Chance</button>
-                </div>
-                }
+                <div class="col-md-2 col-12">
+                    if(ViewBag.Player.Comodin50){
+                    <div class="d-flex justify-content-center mb-3">
+                        <a href='@Url.Action("Descartar50","Home")' class="btn fondoBoton textBoton interletrado">Comodin 50/50</a>
+                    </div>
+                    }
+                    if(ViewBag.Player.ComodinSaltear){
+                    <div class="d-flex justify-content-center mb-3">
+                        <a href='' class="btn fondoBoton textBoton interletrado">Comodín Saltear</a>
+                    </div>
+                    }
+                    if(ViewBag.Player.ComodinDobleChance){
+                    <div class="d-flex justify-content-center mb-3">
+                        <a href='' class="btn fondoBoton textBoton interletrado">Comodín Doble Chance</a>
+                    </div>
+                    }
 
-            </div>
-            <div class="col-md-8 my-auto col-12">
-                
-                <div class ="row-lg">
-                    <div class = "col-12 m-20 d-flex justify-content-center">
-                        <p class="display-2 textCenter interletrado">@ViewBag.Pregunta.TextoPregunta</p>
+                </div>
+                <div class="col-md-8 my-auto col-12">
+                    
+                    <div class ="row-lg">
+                        <div class = "col-12 m-20 d-flex justify-content-center">
+                            <p class="display-2 textCenter interletrado">@ViewBag.Pregunta.TextoPregunta</p>
+                        </div>
+                    </div>
+
+                    <div class = "row row-cols-2 ">
+                        @foreach (Respuestas item in ViewBag.ListaRespuestas)
+                        {
+                            <a href='@Url.Action("PreguntaRespondida","Home", new {Opcion1=@item.OpcionRespuesta})' class="btn-lg btn-primary fondoOPC border border-primary interletrado">@item.TextoRespuesta</a>
+                            
+                        }
                     </div>
                 </div>
-
-                <div class = "row row-cols-2 ">
-                    <!-- foreach(Respuestas resp in ViewBag.ListaRespuestas){<button type="button" class="btn-lg btn-primary fondoOPC border border-primary interletrado">resp</button> } -->
-                    <button type="button" class="btn-lg btn-primary fondoOPC border border-primary interletrado">@ViewBag.ListaRespuestas[0].TextoRespuesta</button>
-                    <button type="button" class="btn-lg btn-primary fondoOPC border border-primary interletrado">@ViewBag.ListaRespuestas[1].TextoRespuesta</button>
-                    <button type="button" class="btn-lg btn-primary fondoOPC border border-primary interletrado">@ViewBag.ListaRespuestas[2].TextoRespuesta</button>
-                    <button type="button" class="btn-lg btn-primary fondoOPC border border-primary interletrado">@ViewBag.ListaRespuestas[3].TextoRespuesta</button>
-                </div>
-
-                
-            </div>
-            <div class="col-md-2 col-12">
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[0].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[1].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoBC interletrado">@ViewBag.ListaPozo[2].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[3].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[4].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoBC interletrado">@ViewBag.ListaPozo[5].Importe</button>
-                </div>    
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[6].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[7].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoBC interletrado">@ViewBag.ListaPozo[8].Importe</button>
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                    <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[9].Importe</button>
+                <div class="col-md-2 col-12">
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[0].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[1].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoBC interletrado">@ViewBag.ListaPozo[2].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[3].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[4].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoBC interletrado">@ViewBag.ListaPozo[5].Importe</button>
+                    </div>    
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[6].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[7].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoBC interletrado">@ViewBag.ListaPozo[8].Importe</button>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button type="button" class="btn fondoBoton textBoton tamanoB interletrado">@ViewBag.ListaPozo[9].Importe</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-    </div>
-    
+    </div>  
 }

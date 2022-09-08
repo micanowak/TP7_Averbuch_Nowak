@@ -7,7 +7,7 @@ namespace tp7_Averbuch_Nowak.Models
 {
     class JuegoQQSM
     {
-        private static string _ConnectionString = @"Server=A-PHZ2-CIDI-022\SQLEXPRESS;DataBase=JuegoQQSM;Trusted_Connection=True;";
+        private static string _ConnectionString = @"Server=A-PHZ2-CIDI-052;DataBase=JuegoQQSM;Trusted_Connection=True;";
 
         private static int _PreguntaActual;
         private static char _RespuestaCorrectaActual;
@@ -23,18 +23,21 @@ namespace tp7_Averbuch_Nowak.Models
         
         public static void IniciarJuego(string Nombre)
         {
-            string SQL = "INSERT INTO Jugadores(Nombre, FechaHora, PozoGanado, ComodinDobleChance, ComodinSaltear, Comodin50) VALUES (@pNombre, @pFechaHora, @pPozoGanado, @pComodinDobleChance, @pComodinSaltear, @pComodin50";
+            string SQL = "INSERT INTO Jugadores(Nombre, FechaHora, PozoGanado, ComodinDobleChance, ComodinSaltear, Comodin50) VALUES (@pNombre, @pFechaHora, @pPozoGanado, @pComodinDobleChance, @pComodinSaltear, @pComodin50)";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
-                db.Execute(SQL, new{pNombre = Nombre, pFechaHora = 1, pPozoGanado = 0, pComodinDobleChance = true, pComodinSaltear = true, pComodin50 = true});
+                db.Execute(SQL, new{pNombre = Nombre, pFechaHora = DateTime.Now, pPozoGanado = 0, pComodinDobleChance = true, pComodinSaltear = true, pComodin50 = true});
             }
             SQL = "SELECT TOP 1 * FROM Jugadores ORDER BY IdJugador DESC";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
-                _Player = db.QueryFirstOrDefault(SQL);
+                _Player = db.QueryFirstOrDefault<Jugadores>(SQL);
             }
             _PreguntaActual = 1;
             _PosicionPozo = 0;
             _PozoAcumuladoSeguro = 0;
             _PozoAcumulado = 0;
+            _Comodin5050 = true;
+            _ComodinSaltearPregunta=true;
+            _ComodinDobleChance=true;
         }
 
         public static List<Pozo> ListaPozo(){
@@ -65,20 +68,20 @@ namespace tp7_Averbuch_Nowak.Models
             Preguntas pregCompleta = new Preguntas();
             string SQL = "SELECT * FROM Preguntas WHERE IdPregunta = @pPreguntaActual";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
-                pregCompleta = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+                pregCompleta = db.QueryFirstOrDefault<Preguntas>(SQL, new{pPreguntaActual = _PreguntaActual});
             }
             return pregCompleta;
         }
 
         public static List<Respuestas> ObtenerRespuestas(){
             List<Respuestas> respPregActual = new List<Respuestas>();
-            string SQL = "SELECT OpcionRespuesta FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual AND Correcta = true";
+            string SQL = "SELECT OpcionRespuesta FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual AND Correcta = 1";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
-                _RespuestaCorrectaActual = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+                _RespuestaCorrectaActual = db.QueryFirstOrDefault<Respuestas>(SQL, new{pPreguntaActual = _PreguntaActual}).OpcionRespuesta;
             }
             SQL = "SELECT * FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual";
             using(SqlConnection db = new SqlConnection(_ConnectionString)){
-                respPregActual = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+                respPregActual = db.Query<Respuestas>(SQL, new{pPreguntaActual = _PreguntaActual}).ToList();
             }
             return respPregActual;
         }
@@ -130,21 +133,18 @@ namespace tp7_Averbuch_Nowak.Models
         }
 
         public static char[] Descartar50(){
-            char[] dev;
+            char[] dev = null;
             if(_Comodin5050){
                 _Comodin5050 = false;
                 string SQL = "UPDATE Jugadores SET Comodin50 = 0 WHERE IdJugador = @pIdJugador";
                 using(SqlConnection db = new SqlConnection(_ConnectionString)){
                 db.Execute(SQL, new{pIdJugador = _Player.IdJugador});
                 }
-                SQL = "SELECT TOP 2 IdRespuesta FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual and Correcta = 0";
+                SQL = "SELECT TOP 2 OpcionRespuesta FROM Respuestas WHERE fkIdPregunta = @pPreguntaActual and Correcta = 0";
                 using(SqlConnection db = new SqlConnection(_ConnectionString)){
-                dev = db.QueryFirstOrDefault(SQL, new{pPreguntaActual = _PreguntaActual});
+                dev = db.Query<char>(SQL, new{pPreguntaActual = _PreguntaActual}).ToList().ToArray();
                 }
-            } else{
-                dev= null;
-            }
-
+            } 
             return dev;
         }
 

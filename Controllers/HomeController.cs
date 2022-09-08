@@ -28,6 +28,27 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Descartar50()
+    {
+        ViewBag.Descartar =  JuegoQQSM.Descartar50();
+        ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta();
+        ViewBag.ListaRespuestas = JuegoQQSM.ObtenerRespuestas();
+        List<Respuestas> RespuestasNoDescartadas= new List<Respuestas>();
+        
+        foreach(Respuestas item in ViewBag.ListaRespuestas)
+        {
+            if(item.OpcionRespuesta!=ViewBag.Descartar[0] && item.OpcionRespuesta!=ViewBag.Descartar[1])
+            {
+                RespuestasNoDescartadas.Add(item);
+            }
+        }
+        ViewBag.ListaRespuestas = RespuestasNoDescartadas;
+        ViewBag.Player = JuegoQQSM.DevolverJugador();
+        ViewBag.ListaPozo = JuegoQQSM.ListaPozo();
+
+        return View("Pregunta");
+    }
+
     public IActionResult FinDelJuego()
     {
         ViewBag.InfoPlayer = JuegoQQSM.DevolverJugador();
@@ -40,7 +61,7 @@ public class HomeController : Controller
     {
         JuegoQQSM.IniciarJuego(Nombre);
         ViewBag.Pregunta = JuegoQQSM.ObtenerProximaPregunta();
-        ViewBag.ListaRespuestas = JuegoQQSM.ObtenerProximaPregunta();
+        ViewBag.ListaRespuestas = JuegoQQSM.ObtenerRespuestas();
         ViewBag.Player = JuegoQQSM.DevolverJugador();
         ViewBag.ListaPozo = JuegoQQSM.ListaPozo();
         return View("Pregunta");
